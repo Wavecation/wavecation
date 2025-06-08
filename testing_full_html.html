@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wavecation - 完美跳转解决方案</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    header a {
+      position: relative;
+      padding-bottom: 6px;
+      text-decoration: none;
+      color: black;
+      border-bottom: 2px solid transparent;
+    }
+    header a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: currentColor;
+      left: 0;
+      bottom: 0;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease-out;
+    }
+    header a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .slogan-en {
+      font-family: 'Michroma', sans-serif;
+    }
+
+    .slogan-zh {
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 6rem; /* 关键解决方案 */
+    }
+
+    /* 平滑过渡效果 */
+    section[id] {
+      scroll-margin-top: 6rem; /* 与导航栏高度匹配 */
+    }
+    
+    /* 新的箭头样式 */
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .slider-arrow:hover {
+      background: white;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .slider-arrow.left {
+      left: 1.5rem;
+    }
+    
+    .slider-arrow.right {
+      right: 1.5rem;
+    }
+    
+    .slider-arrow-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      position: relative;
+    }
+    
+    .slider-arrow-icon::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0.75rem;
+      height: 0.75rem;
+      border-top: 2px solid #1f2937;
+      border-left: 2px solid #1f2937;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      transition: all 0.3s ease;
+    }
+    
+    .slider-arrow.right .slider-arrow-icon::before {
+      transform: translate(-50%, -50%) rotate(135deg);
+    }
+    
+    .slider-arrow:hover .slider-arrow-icon::before {
+      border-color: #000;
+    }
+    
+    /* 跳转目标高亮效果 */
+    :target {
+      animation: highlight 1.5s ease;
+    }
+    
+    @keyframes highlight {
+      0% { background-color: rgba(147, 197, 253, 0); }
+      50% { background-color: rgba(147, 197, 253, 0.3); }
+      100% { background-color: rgba(147, 197, 253, 0); }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Han+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Shrikhand&display=swap" rel="stylesheet">
+</head>
+
+<body class="m-0 p-0 font-sans">
+
+  <header class="flex items-center justify-between px-12 py-3 bg-white shadow-md fixed w-full z-50">
+    <div class="flex items-center space-x-4">
+      <img src="images/logo_trans.png" alt="Logo" class="w-14 h-14" />
+      <span class="text-2xl font-bold" style="font-family: 'Michroma', sans-serif;">Wavecation</span>
+    </div>
+
+    <nav>
+      <ul class="flex space-x-8 text-gray-700 font-medium" style="font-family: 'Poppins', sans-serif;">
+        <li><a href="#">首页</a></li>
+        <li><a href="#services">服务</a></li>
+        <li><a href="#">纪念品</a></li>
+        <li><a href="#">关于我们</a></li>
+        <li><a href="#">联系方式</a></li>
+      </ul>
+    </nav>
+  </header> 
+
+  <main class="pt-16"> <!-- 添加顶部内边距避免内容被导航栏遮挡 -->
+    <section
+      class="h-[100vh] bg-cover bg-center flex flex-col items-center justify-center text-white text-center relative"
+      style="background-image: url('https://images.unsplash.com/photo-1682687982167-d7fb3ed8541d?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
+    >
+      <div class="z-10">
+        <p class="font-poppins text-white text-lg font-medium">
+          Wavecation为您提供一站式旅游安排，享受潜水和浮潜的乐趣。
+        </p>
+        <h2 class="font-poppins text-3xl font-medium my-5 leading-loose">
+          探索您的完美假期
+        </h2>
+        <a
+          href="#services"
+          class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded border border-gray-400 transition duration-300"
+        >
+          了解更多
+        </a>
+      </div>
+      <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+    </section>
+
+    <!-- 服务部分 - 添加了额外的顶部内边距 -->
+    <section id="services" class="relative overflow-hidden min-h-[600px] w-full py-16">
+      <div class="w-full h-full">
+        <div class="flex h-full transition-transform duration-500 ease-in-out">
+          <!-- 个性化旅游安排 -->
+          <div class="w-full h-full flex-shrink-0">
+            <div class="w-full min-h-[600px] bg-white flex items-center justify-center p-6">
+              <div class="w-full max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-12">
+                <div class="lg:w-1/2 w-full flex flex-col items-center justify-center text-center px-4">
+                  <h3 class="font-serif font-extrabold text-2xl md:text-3xl mb-6">
+                    个性化旅游安排
+                  </h3>
+                  <p class="font-serif text-lg leading-relaxed mb-8 max-w-2xl">
+                    我们为每位客户提供量身定制的旅游方案，以满足您的特定需求和喜好。无论是潜水还是浮潜，我们都会为您安排最佳体验。
+                  </p>
+                  <a
+                    href="#"
+                    class="inline-block bg-gray-800 hover:bg-black text-white font-bold py-3 px-8 rounded border border-gray-400 transition-all duration-300 hover:scale-105"
+                  >
+                    立即咨询
+                  </a>
+                </div>
+                
+                <div class="lg:w-1/2 w-full max-w-2xl flex items-center justify-center transform transition-all duration-700 hover:scale-[1.03]">
+                  <div class="relative aspect-video w-full rounded-xl shadow-2xl overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                      alt="个性化旅游安排" 
+                      class="absolute inset-0 w-full h-full object-cover transition-all duration-700 hover:scale-110" 
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 新的箭头设计 -->
+      <div class="slider-arrow left">
+        <div class="slider-arrow-icon"></div>
+      </div>
+      <div class="slider-arrow right">
+        <div class="slider-arrow-icon"></div>
+      </div>
+    </section>
+
+    <section class="bg-gray-300 text-black h-52 flex items-center justify-center text-center text-xl leading-9 border-4 border-gray-400">
+      <blockquote class="text-4xl text-black font-medium leading-loose" style="font-family: 'Luckiest Guy', cursive;">
+        Splash and dive, come feel alive<br />飞溅浪花，活力无限
+      </blockquote>
+    </section>
+  </main>
+
+  <footer class="bg-black text-gray-400 h-14 flex items-center justify-center text-sm">
+    <p>&copy; 2025 Wavecation. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // 解决跳转时内容被遮挡的问题
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          // 计算偏移量 - 导航栏高度 + 额外间距
+          const offset = 80; 
+          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+          
+          // 添加高亮效果
+          targetElement.classList.add('highlight-target');
+          setTimeout(() => {
+            targetElement.classList.remove('highlight-target');
+          }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
