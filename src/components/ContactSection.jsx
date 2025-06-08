@@ -36,7 +36,7 @@ const ContactSection = () => {
     {
       name: '小红书',
       icon: <RiBook2Line className="text-2xl" />,
-      url: 'https://www.xiaohongshu.com/user/profile/wavecation',
+      url: 'https://www.xiaohongshu.com/user/profile/67693d98000000001801478e',
       color: 'bg-red-100 text-red-600 hover:bg-red-200'
     }
   ];
