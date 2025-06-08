@@ -8,10 +8,10 @@ const ImageGallery = () => {
     '/images/GPTempDownload(1).jpg',
     '/images/GPTempDownload(2).jpg',
     '/images/4-1f970502.jpg',
-    '/images/IMG_9005.jpg',
+    '/images/IMG_9005.JPG',
     '/images/2-18290e18.jpg',
     '/images/4-18290e18.jpg',
-    '/images/IMG_3723.jpg',
+    '/images/IMG_3723.JPG',
     '/images/GPTempDownload.jpg'
   ];
 
