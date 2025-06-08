@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { SlSocialInstagram } from "react-icons/sl";
-import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
+import {  FaWhatsapp } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { FiArrowDown } from "react-icons/fi"; 
+import { RiBook2Line } from "react-icons/ri";;
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -28,15 +29,15 @@ const ContactSection = () => {
     },
     {
       name: 'Email',
-      icon: <IoIosMail className="text-2xl" />,
+      icon: <IoIosMail className="text-3xl" />,
       url: 'mailto:wavecation07@email.com',
-      color: 'bg-red-100 text-red-600 hover:bg-red-200'
+      color: 'bg-blue-100 text-blue-600 hover:bg-blue-200'
     },
     {
-      name: 'Phone',
-      icon: <FaPhoneAlt className="text-2xl" />,
-      url: 'tel:+60169423719',
-      color: 'bg-blue-100 text-blue-600 hover:bg-blue-200'
+      name: '小红书',
+      icon: <RiBook2Line className="text-2xl" />,
+      url: 'https://www.xiaohongshu.com/user/profile/wavecation',
+      color: 'bg-red-100 text-red-600 hover:bg-red-200'
     }
   ];
 
