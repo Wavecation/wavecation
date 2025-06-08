@@ -28,7 +28,7 @@ const ImageGallery = () => {
                 <img
                   src={image}
                   alt={`展示图片 ${index + 1}`}
-                  className="w-full h-full object-cover hover:rounded-xl transition-all duration-300"
+                  className="w-full h-full object-cover hover:rounded-3xl transition-all duration-300"
                 />
               </div>
             </div>
@@ -43,7 +43,7 @@ const ImageGallery = () => {
                 <img
                   src={image}
                   alt={`展示图片 ${index + 6}`}
-                  className="w-full h-full object-cover hover:rounded-xl transition-all duration-300"
+                  className="w-full h-full object-cover hover:rounded-3xl transition-all duration-300"
                 />
               </div>
             </div>
