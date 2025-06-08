@@ -23,6 +23,10 @@ const CartModal = ({
     }));
   };
 
+  // Calculate shipping fee based on region and order total
+  const shippingFee = total >= 200 ? 0 : (customerInfo.region === 'east' ? 20 : 10);
+  const grandTotal = total + shippingFee;
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
@@ -95,9 +99,36 @@ const CartModal = ({
                   </div>
                   
                   <div className="border-t pt-4">
-                    <div className="flex justify-between text-lg font-bold">
-                      <span>总计:</span>
-                      <span>RM {total.toFixed(2)}</span>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span>商品总额:</span>
+                        <span>RM {total.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>
+                          运费 {total >= 200 ? (
+                            <span className="text-green-600">(免邮优惠!)</span>
+                          ) : customerInfo.region ? (
+                            `(${customerInfo.region === 'east' ? '东马' : '西马'})`
+                          ) : ''}:
+                        </span>
+                        <span>
+                          {total >= 200 ? (
+                            <span className="text-green-600">RM 0.00</span>
+                          ) : (
+                            `RM ${shippingFee.toFixed(2)}`
+                          )}
+                        </span>
+                      </div>
+                      {total >= 200 && (
+                        <div className="text-sm text-green-600">
+                          * 恭喜! 您的订单已满足免邮条件 (满RM200免邮)
+                        </div>
+                      )}
+                      <div className="flex justify-between text-lg font-bold">
+                        <span>总计:</span>
+                        <span>RM {grandTotal.toFixed(2)}</span>
+                      </div>
                     </div>
                   </div>
                   
@@ -141,6 +172,25 @@ const CartModal = ({
                         />
                       </div>
                       <div>
+                        <label htmlFor="region" className="block text-sm font-medium text-gray-700">运费</label>
+                        <select
+                          id="region"
+                          name="region"
+                          value={customerInfo.region}
+                          onChange={handleInputChange}
+                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          required
+                          disabled={total >= 200}
+                        >
+                          <option value="">请选择地区</option>
+                          <option value="west">西马 (RM10)</option>
+                          <option value="east">东马 (RM20)</option>
+                        </select>
+                        {total >= 200 && (
+                          <p className="mt-1 text-sm text-gray-500">免邮订单无需选择地区</p>
+                        )}
+                      </div>
+                      <div className="sm:col-span-2">
                         <label htmlFor="address" className="block text-sm font-medium text-gray-700">地址</label>
                         <input
                           type="text"
@@ -202,6 +252,9 @@ const CartModal = ({
                         <li>付款成功后，后台会核实付款信息</li>
                         <li>并在1-3个工作日内处理您的订单</li>
                         <li>发货后您将收到包含物流信息的通知</li>
+                        {total >= 200 && (
+                          <li className="text-green-600 font-medium">您的订单享受免邮优惠!</li>
+                        )}
                       </ul>
                     </div>
 
@@ -209,13 +262,15 @@ const CartModal = ({
                     {customerInfo.paymentMethod === 'tng' && (
                       <div className="mt-4 p-4 bg-gray-100 rounded-lg text-center">
                         <p className="text-sm font-medium mb-2">请扫描以下TNG二维码付款:</p>
-                        
                         <img 
                           src={TngQR} 
                           alt="TNG Payment QR Code" 
-                          className="w-128 h-128 object-contain mx-auto"
+                          className="w-48 h-48 object-contain mx-auto"
                         />
-                        <p className="text-sm mt-2 font-semibold">总金额: RM {total.toFixed(2)}</p>
+                        <p className="text-sm mt-2 font-semibold">总金额: RM {grandTotal.toFixed(2)}</p>
+                        {total >= 200 && (
+                          <p className="text-sm text-green-600 mt-1">包含免邮优惠</p>
+                        )}
                       </div>
                     )}
 
@@ -228,6 +283,9 @@ const CartModal = ({
                           <p>账户名: TEE HUI XIN</p>
                           <p>账号: 7637324152</p>
                           <p className="mt-2">转账后请将付款凭证发送至我们的邮箱或WhatsApp</p>
+                          {total >= 200 && (
+                            <p className="text-green-600 font-medium mt-1">您的订单享受免邮优惠!</p>
+                          )}
                         </div>
                       </div>
                     )}
@@ -238,7 +296,7 @@ const CartModal = ({
                       onClick={handleCheckout}
                       className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-medium"
                     >
-                      提交订单
+                      提交订单 (RM {grandTotal.toFixed(2)})
                     </button>
                   </div>
                 </>

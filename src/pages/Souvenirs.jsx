@@ -344,8 +344,8 @@ const Souvenirs = () => {
               const variantStock = itemStock?.variants?.[colorIndex] || 0;
               
               return (
-                <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
-                  <div className="aspect-square overflow-hidden">
+                <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full mb-0">
+                  <div className="aspect-square overflow-hidden mb-0">
                     <img  
                       src={item.colors ? item.colors[colorIndex].image : item.image} 
                       alt={item.name}
@@ -452,8 +452,12 @@ const Souvenirs = () => {
                     </div>
                   </div>
                 </div>
+                
               );
             })}
+            <p className="text-xs text-gray-500 mt-2 text-center flex mt-0">
+            * 满RM200可享免邮优惠
+            </p>
           </div>
         </section>
       </main>
