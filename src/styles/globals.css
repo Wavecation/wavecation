@@ -174,3 +174,12 @@ html {
 .souvenir-card:hover {
   transform: translateY(-5px);
 }
+
+.language-btn {
+  transition: all 0.3s ease;
+}
+
+.language-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

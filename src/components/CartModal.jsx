@@ -1,5 +1,6 @@
 import React from 'react';
 import TngQR from '../images/Tng_QR.jpg';
+import { useTranslation } from 'react-i18next';
 
 const CartModal = ({
   isOpen,
@@ -13,6 +14,7 @@ const CartModal = ({
   handleCheckout,
   orderSuccess
 }) => {
+  const { t, i18n } = useTranslation();
   if (!isOpen) return null;
 
   const handleInputChange = (e) => {
@@ -25,14 +27,14 @@ const CartModal = ({
 
   // Calculate shipping fee based on region and order total
   const shippingFee = total >= 200 ? 0 : (customerInfo.region === 'east' ? 20 : 10);
-  const grandTotal = total + shippingFee;
+  const grandTotal = total + shippingFee; 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center border-b pb-4">
-            <h2 className="text-2xl font-bold">购物车</h2>
+            <h2 className="text-2xl font-bold">{t('cart.title')}</h2>
             <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -45,9 +47,9 @@ const CartModal = ({
               <svg className="mx-auto h-16 w-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
               </svg>
-              <h3 className="mt-4 text-xl font-medium text-gray-900">订单提交成功!</h3>
+              <h3 className="mt-4 text-xl font-medium text-gray-900">{t('cart.orderSuccess1')}</h3>
               <p className="mt-2 text-gray-600">
-                感谢您的购买！
+                {t('cart.orderSuccess2')}
               </p>
             </div>
           ) : (
@@ -57,8 +59,8 @@ const CartModal = ({
                   <svg className="mx-auto h-16 w-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
-                  <h3 className="mt-4 text-xl font-medium text-gray-900">购物车是空的</h3>
-                  <p className="mt-2 text-gray-600">请添加一些商品到购物车</p>
+                  <h3 className="mt-4 text-xl font-medium text-gray-900">{t('cart.emptyCart')}</h3>
+                  <p className="mt-2 text-gray-600">{t('cart.addItemsPrompt')}</p>
                 </div>
               ) : (
                 <>
@@ -101,17 +103,17 @@ const CartModal = ({
                   <div className="border-t pt-4">
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span>商品总额:</span>
+                        <span>{t('cart.subtotal')}:</span>
                         <span>RM {total.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>
-                          运费 {total >= 200 ? (
-                            <span className="text-green-600">(免邮优惠!)</span>
+                          {t('cart.shippingFee')} {total >= 200 ? (
+                            <span className="text-green-600">({t('cart.freeShippingPromo')})</span>
                           ) : customerInfo.region ? (
-                            `(${customerInfo.region === 'east' ? '东马' : '西马'})`
+                            `(${customerInfo.region === 'east' ? t('cart.eastMalaysia') : t('cart.westMalaysia')})`
                           ) : ''}:
-                        </span>
+                        </span> 
                         <span>
                           {total >= 200 ? (
                             <span className="text-green-600">RM 0.00</span>
@@ -122,21 +124,21 @@ const CartModal = ({
                       </div>
                       {total >= 200 && (
                         <div className="text-sm text-green-600">
-                          * 恭喜! 您的订单已满足免邮条件 (满RM200免邮)
+                          {t('cart.freeShippingMessage')}
                         </div>
                       )}
                       <div className="flex justify-between text-lg font-bold">
-                        <span>总计:</span>
+                        <span>{t('cart.grandTotal')}:</span>
                         <span>RM {grandTotal.toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
                   
                   <div className="mt-6">
-                    <h3 className="text-lg font-medium mb-4">客户信息</h3>
+                    <h3 className="text-lg font-medium mb-4">{t('cart.customerInfo')}</h3>
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">姓名</label>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">{t('cart.name')}</label>
                         <input
                           type="text"
                           id="name"
@@ -144,11 +146,12 @@ const CartModal = ({
                           value={customerInfo.name}
                           onChange={handleInputChange}
                           className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          placeholder={t('contact.ans1')}
                           required
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">邮箱</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('cart.email')}</label>
                         <input
                           type="email"
                           id="email"
@@ -156,11 +159,12 @@ const CartModal = ({
                           value={customerInfo.email}
                           onChange={handleInputChange}
                           className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          placeholder={t('contact.ans2')}
                           required
                         />
                       </div>
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">电话</label>
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">{t('cart.phone')}</label>
                         <input
                           type="tel"
                           id="phone"
@@ -168,11 +172,12 @@ const CartModal = ({
                           value={customerInfo.phone}
                           onChange={handleInputChange}
                           className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          placeholder={t('trips.phone_eg')}
                           required
                         />
                       </div>
                       <div>
-                        <label htmlFor="region" className="block text-sm font-medium text-gray-700">运费</label>
+                        <label htmlFor="region" className="block text-sm font-medium text-gray-700">{t('cart.shippingFee')}</label>
                         <select
                           id="region"
                           name="region"
@@ -182,16 +187,16 @@ const CartModal = ({
                           required
                           disabled={total >= 200}
                         >
-                          <option value="">请选择地区</option>
-                          <option value="west">西马 (RM10)</option>
-                          <option value="east">东马 (RM20)</option>
+                          <option value="">{t('cart.selectRegion')}</option>
+                          <option value="west">{t('cart.westMalaysia')} (RM10)</option>
+                          <option value="east">{t('cart.eastMalaysia')} (RM20)</option>
                         </select>
                         {total >= 200 && (
-                          <p className="mt-1 text-sm text-gray-500">免邮订单无需选择地区</p>
+                          <p className="mt-1 text-sm text-gray-500"> {t('cart.noRegionSelectionNeeded')}</p>
                         )}
                       </div>
                       <div className="sm:col-span-2">
-                        <label htmlFor="address" className="block text-sm font-medium text-gray-700">地址</label>
+                        <label htmlFor="address" className="block text-sm font-medium text-gray-700">{t('cart.address')}</label>
                         <input
                           type="text"
                           id="address"
@@ -207,7 +212,7 @@ const CartModal = ({
 
                   {/* Payment Method Section */}
                   <div className="mt-6">
-                    <h3 className="text-lg font-medium mb-4">付款方式</h3>
+                    <h3 className="text-lg font-medium mb-4">{t('cart.paymentMethod')}</h3>
                     <div className="space-y-3">
                       <div className="flex items-center">
                         <input
@@ -238,22 +243,22 @@ const CartModal = ({
                           }))}
                         />
                         <label htmlFor="bankTransfer" className="ml-3 block text-sm font-medium text-gray-700">
-                          银行转账
+                          {t('cart.bankTransfer')}
                         </label>
                       </div>
                     </div>
 
                     {/* Payment Instructions */}
                     <div className="mt-4 p-4 bg-gray-100 rounded-lg">
-                      <h4 className="font-medium text-sm mb-2">付款说明:</h4>
+                      <h4 className="font-medium text-sm mb-2">{t('cart.paymentInstructions')}:</h4>
                       <ul className="text-sm text-gray-600 list-disc pl-5 space-y-1">
-                        <li>下单前请完成付款</li>
-                        <li>付款时请备注您的订单号或姓名</li>
-                        <li>付款成功后，后台会核实付款信息</li>
-                        <li>并在1-3个工作日内处理您的订单</li>
-                        <li>发货后您将收到包含物流信息的通知</li>
+                        <li>{t('cart.paymentInstruction1')}</li>
+                        <li>{t('cart.paymentInstruction2')}</li>
+                        <li>{t('cart.paymentInstruction3')}</li>
+                        <li>{t('cart.paymentInstruction4')}</li>
+                        <li>{t('cart.paymentInstruction5')}</li>
                         {total >= 200 && (
-                          <li className="text-green-600 font-medium">您的订单享受免邮优惠!</li>
+                          <li className="text-green-600 font-medium">{t('cart.paymentInstruction6')}</li>
                         )}
                       </ul>
                     </div>
@@ -261,15 +266,15 @@ const CartModal = ({
                     {/* TNG QR Code (shown when TNG is selected) */}
                     {customerInfo.paymentMethod === 'tng' && (
                       <div className="mt-4 p-4 bg-gray-100 rounded-lg text-center">
-                        <p className="text-sm font-medium mb-2">请扫描以下TNG二维码付款:</p>
+                        <p className="text-sm font-medium mb-2">{t('cart.scanTNGQR')}:</p>
                         <img 
                           src={TngQR} 
                           alt="TNG Payment QR Code" 
                           className="w-48 h-48 object-contain mx-auto"
                         />
-                        <p className="text-sm mt-2 font-semibold">总金额: RM {grandTotal.toFixed(2)}</p>
+                        <p className="text-sm mt-2 font-semibold">{t('cart.totalAmount')}: RM {grandTotal.toFixed(2)}</p>
                         {total >= 200 && (
-                          <p className="text-sm text-green-600 mt-1">包含免邮优惠</p>
+                          <p className="text-sm text-green-600 mt-1">{t('cart.includesFreeShipping')}</p>
                         )}
                       </div>
                     )}
@@ -277,14 +282,14 @@ const CartModal = ({
                     {/* Bank Transfer Info (shown when bank transfer is selected) */}
                     {customerInfo.paymentMethod === 'bankTransfer' && (
                       <div className="mt-4 p-4 bg-gray-100 rounded-lg">
-                        <h4 className="font-medium text-sm mb-2">银行转账信息:</h4>
+                        <h4 className="font-medium text-sm mb-2">{t('cart.bankTransferInfo')}:</h4>
                         <div className="text-sm text-gray-600 space-y-1">
-                          <p>银行: CIMB BANK</p>
-                          <p>账户名: TEE HUI XIN</p>
-                          <p>账号: 7637324152</p>
-                          <p className="mt-2">转账后请将付款凭证发送至我们的邮箱或WhatsApp</p>
+                          <p>{t('cart.bank')}: CIMB BANK</p>
+                          <p>{t('cart.accountName')}: TEE HUI XIN</p>
+                          <p>{t('cart.accountNumber')}: 7637324152</p>
+                          <p className="mt-2">{t('cart.sendPaymentProof')}</p>
                           {total >= 200 && (
-                            <p className="text-green-600 font-medium mt-1">您的订单享受免邮优惠!</p>
+                            <p className="text-green-600 font-medium mt-1">{t('cart.paymentInstruction6')}</p>
                           )}
                         </div>
                       </div>
@@ -296,7 +301,7 @@ const CartModal = ({
                       onClick={handleCheckout}
                       className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-medium"
                     >
-                      提交订单 (RM {grandTotal.toFixed(2)})
+                      {t('cart.checkout')} (RM {grandTotal.toFixed(2)})
                     </button>
                   </div>
                 </>

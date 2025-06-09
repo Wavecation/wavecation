@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useTranslation } from 'react-i18next';
 
 const Trips = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const formSectionRef = useRef(null);
-  const toursSectionRef = useRef(null)
+  const toursSectionRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -20,8 +21,12 @@ const Trips = () => {
     pickupLocation: '',
     boatTicket: 'yes',
     meal: 'yes',
-    isMalaysian: 'yes'
+    isMalaysian: 'yes',
+    adults: 1,
+    children: 0,
+    rooms: 1
   });
+  const { t, i18n } = useTranslation(); 
 
   useEffect(() => {
     const scrollToSection = () => {
@@ -118,7 +123,7 @@ const Trips = () => {
              className="scroll-mt-20"
             >
                 <h1 className="text-4xl font-bold text-center mb-12 text-blue-800">
-                    刁曼岛客制化行程
+                    {t('trips.title')}
                 </h1>
                 
                 <div 
@@ -134,14 +139,14 @@ const Trips = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                         <label className="block text-lg font-medium text-gray-700 mb-2">
-                            姓名 <span className="text-red-500">*</span>
+                            {t('contact.ques1')} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="text"
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            placeholder="请输入您的姓名"
+                            placeholder={t('contact.ans1')}
                             className="w-full p-3 border border-gray-300 rounded-lg"
                             required
                         />
@@ -149,14 +154,14 @@ const Trips = () => {
 
                         <div>
                         <label className="block text-lg font-medium text-gray-700 mb-2">
-                            联系电话 <span className="text-red-500">*</span>
+                            {t('trips.phone')} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="tel"
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
-                            placeholder="例如: +60 12-345 6789"
+                            placeholder={t('trips.phone_eg')}
                             className="w-full p-3 border border-gray-300 rounded-lg"
                             required
                         />
@@ -166,14 +171,14 @@ const Trips = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                         <label className="block text-lg font-medium text-gray-700 mb-2">
-                            电子邮箱 <span className="text-red-500">*</span>
+                            {t('contact.ques2')} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            placeholder="example@email.com"
+                            placeholder={t('contact.ans2')}
                             className="w-full p-3 border border-gray-300 rounded-lg"
                             required
                         />
@@ -184,7 +189,7 @@ const Trips = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                         <label className="block text-lg font-medium text-gray-700 mb-2">
-                            出发日期 <span className="text-red-500">*</span>
+                            {t('trips.date1')} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="date"
@@ -199,7 +204,7 @@ const Trips = () => {
 
                         <div>
                         <label className="block text-lg font-medium text-gray-700 mb-2">
-                            返回日期 <span className="text-red-500">*</span>
+                            {t('trips.date2')} <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="date"
@@ -217,13 +222,13 @@ const Trips = () => {
 
                     {/* 行程定制部分 */}
                     <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                        行程定制选项
+                        {t('trips.subtitle')}
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                         <label className="block text-lg font-medium text-gray-700 mb-2">
-                            玩乐配套 <span className="text-red-500">*</span>
+                            {t('trips.packages')} <span className="text-red-500">*</span>
                         </label>
                         <select
                             name="activity"
@@ -232,33 +237,73 @@ const Trips = () => {
                             className="w-full p-3 border border-gray-300 rounded-lg"
                             required
                         >
-                            <option value="">请选择</option>
-                            <option value="OW">开放水域潜水(OW)</option>
-                            <option value="AOW">进阶开放水域(AOW)</option>
-                            <option value="fundive">欢乐潜水(Fundive)</option>
-                            <option value="snorkeling">浮潜</option>
-                            <option value="photograph">海边/水下写真约拍</option>
+                            <option value="">{t('trips.choose')}</option>
+                            <option value="OW">{t('trips.choice1')}(OW)</option>
+                            <option value="AOW">{t('trips.choice2')}</option>
+                            <option value="fundive">{t('trips.choice3')}</option>
+                            <option value="snorkeling">{t('trips.choice4')}</option>
+                            <option value="photograph">{t('trips.choice5')}</option>
                         </select>
                         </div>
 
+                        
+                        {/* 人数选择 */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
-                        <label className="block text-lg font-medium text-gray-700 mb-2">
-                            住宿 <span className="text-red-500">*</span>
-                        </label>
-                        <select
-                            name="accommodation"
-                            value={formData.accommodation}
+                            <label className="block text-lg font-medium text-gray-700 mb-2">
+                            {t('trips.adults')} <span className="text-red-500">*</span>
+                            </label>
+                            <select
+                            name="adults"
+                            value={formData.adults}
                             onChange={handleChange}
                             className="w-full p-3 border border-gray-300 rounded-lg"
                             required
-                        >
-                            <option value="">请选择</option>
-                            <option value="single">单人房</option>
-                            <option value="double">双人房</option>
-                            <option value="triple">三人房</option>
-                            <option value="quad">四人房</option>
-                            <option value="dorm">六人拼房</option>
-                        </select>
+                            >
+                            {[1, 2, 3, 4, 5, 6].map(num => (
+                                <option key={`adult-${num}`} value={num}>
+                                {num} {t('trips.adultsUnit')}
+                                </option>
+                            ))}
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-lg font-medium text-gray-700 mb-2">
+                            {t('trips.children')}
+                            </label>
+                            <select
+                            name="children"
+                            value={formData.children}
+                            onChange={handleChange}
+                            className="w-full p-3 border border-gray-300 rounded-lg"
+                            >
+                            {[0, 1, 2, 3, 4].map(num => (
+                                <option key={`child-${num}`} value={num}>
+                                {num} {t('trips.childrenUnit')}
+                                </option>
+                            ))}
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-lg font-medium text-gray-700 mb-2">
+                            {t('trips.rooms')} <span className="text-red-500">*</span>
+                            </label>
+                            <select
+                            name="rooms"
+                            value={formData.rooms}
+                            onChange={handleChange}
+                            className="w-full p-3 border border-gray-300 rounded-lg"
+                            required
+                            >
+                            {[1, 2, 3, 4].map(num => (
+                                <option key={`room-${num}`} value={num}>
+                                {num} {t('trips.roomsUnit')}
+                                </option>
+                            ))}
+                            </select>
+                        </div>
                         </div>
                     </div>
 
@@ -266,7 +311,7 @@ const Trips = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                         <label className="block text-lg font-medium text-gray-700 mb-2">
-                            往返码头交通 <span className="text-red-500">*</span>
+                            {t('trips.transport')} <span className="text-red-500">*</span>
                         </label>
                         <div className="flex space-x-4">
                             <label className="inline-flex items-center">
@@ -279,7 +324,7 @@ const Trips = () => {
                                 className="h-5 w-5 text-blue-600"
                                 required
                             />
-                            <span className="ml-2">需要</span>
+                            <span className="ml-2">{t('trips.required')}</span>
                             </label>
                             <label className="inline-flex items-center">
                             <input
@@ -290,7 +335,7 @@ const Trips = () => {
                                 onChange={handleChange}
                                 className="h-5 w-5 text-blue-600"
                             />
-                            <span className="ml-2">不需要</span>
+                            <span className="ml-2">{t('trips.notrequired')}</span>
                             </label>
                         </div>
                         </div>
@@ -318,7 +363,7 @@ const Trips = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
                         <label className="block text-lg font-medium text-gray-700 mb-2">
-                            船票 <span className="text-red-500">*</span>
+                            {t('trips.ferry')} <span className="text-red-500">*</span>
                         </label>
                         <select
                             name="boatTicket"
@@ -327,14 +372,14 @@ const Trips = () => {
                             className="w-full p-3 border border-gray-300 rounded-lg"
                             required
                         >
-                            <option value="yes">需要</option>
-                            <option value="no">不需要</option>
+                            <option value="yes">{t('trips.required')}</option>
+                            <option value="no">{t('trips.notrequired')}</option>
                         </select>
                         </div>
 
                         <div>
                         <label className="block text-lg font-medium text-gray-700 mb-2">
-                            包餐 <span className="text-red-500">*</span>
+                            {t('trips.meal')} <span className="text-red-500">*</span>
                         </label>
                         <select
                             name="meal"
@@ -343,14 +388,14 @@ const Trips = () => {
                             className="w-full p-3 border border-gray-300 rounded-lg"
                             required
                         >
-                            <option value="yes">需要</option>
-                            <option value="no">不需要</option>
+                            <option value="yes">{t('trips.required')}</option>
+                            <option value="no">{t('trips.notrequired')}</option>
                         </select>
                         </div>
 
                         <div>
                         <label className="block text-lg font-medium text-gray-700 mb-2">
-                            马来西亚公民 <span className="text-red-500">*</span>
+                            {t('trips.Malaysian')} <span className="text-red-500">*</span>
                         </label>
                         <select
                             name="isMalaysian"
@@ -359,8 +404,8 @@ const Trips = () => {
                             className="w-full p-3 border border-gray-300 rounded-lg"
                             required
                         >
-                            <option value="yes">是</option>
-                            <option value="no">否</option>
+                            <option value="yes">{t('trips.yes')}</option>
+                            <option value="no">{t('trips.no')}</option>
                         </select>
                         </div>
                     </div>
@@ -370,7 +415,7 @@ const Trips = () => {
                         type="submit"
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
                         >
-                        提交预订请求
+                        {t('trips.button')}
                         </button>
                     </div>
                     </form>
@@ -393,10 +438,10 @@ const Trips = () => {
                     <div className="absolute inset-0 bg-black opacity-30"></div>
                     <div className="relative z-10 p-12 text-center">
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        潜水旅游团即将开放
+                        {t('trips.tourstitle')}
                     </h2>
                     <p className="text-xl text-blue-100 mb-8">
-                        我们正在筹备更多精彩的潜水旅游团，包括科莫多、马布岛等世界级潜点
+                        {t('trips.toursdesc1')}
                     </p>
                     
                     <div className="flex justify-center">
@@ -404,7 +449,7 @@ const Trips = () => {
                         <svg className="animate-pulse h-8 w-8 text-yellow-300 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span className="text-white text-xl font-semibold">即将推出</span>
+                        <span className="text-white text-xl font-semibold">{t('trips.toursdesc2')}</span>
                         </div>
                     </div>
                     </div>

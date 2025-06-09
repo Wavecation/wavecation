@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ImageGallery = () => {
   // 10张示例图片URL
@@ -14,11 +15,12 @@ const ImageGallery = () => {
     '/images/IMG_3723.JPG',
     '/images/GPTempDownload.jpg'
   ];
+  const { t, i18n } = useTranslation(); // 正确解构 t 和 i18n
 
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-700">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-white mb-8">精彩瞬间</h2>
+        <h2 className="text-3xl font-bold text-center text-white mb-8">{t('gallery.title')}</h2>
         
         {/* 第一排图片 */}
         <div className="flex flex-wrap justify-center gap-0 mb-4">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CartModal from '../components/CartModal';
+import { useTranslation } from 'react-i18next';
 
 // 导入所有图片
 import mantaLightGrey from '../images/manta_light_grey.jpg';
@@ -14,6 +15,7 @@ import whaleSharkDarkBlue from '../images/ws_dark_blue.jpg';
 import orca from '../images/orca.jpg';
 import hammerLightGrey from '../images/hammer_light_grey.jpg';
 import hammerBlue from '../images/hammer_blue.jpg';
+
 
 // 模拟API调用
 const fetchStockData = async () => {
@@ -43,44 +45,45 @@ const fetchOrders = async () => {
   return orders ? JSON.parse(orders) : [];
 };
 
-const souvenirs = [
-  {
-    id: 1,
-    name: '蝠鲼 Manta',
-    colors: [
-      { name: '经典浅灰色', price: 38.00, image: mantaLightGrey },
-      { name: '经典深灰色', price: 38.00, image: mantaDarkGrey },
-      { name: '星空款蓝色', price: 45.00, image: mantaStaryBlue },
-      { name: '星空款墨绿色', price: 45.00, image: mantaStaryGreen },
-    ]
-  },
-  {
-    id: 2,
-    name: '鲸鲨 Whale Shark',
-    colors: [
-      { name: '浅灰色', price: 35.00, image: whaleSharkDarkGrey },
-      { name: '浅蓝色', price: 35.00, image: whaleSharkLightBlue },
-      { name: '深蓝色', price: 35.00, image: whaleSharkDarkBlue },
-    ]
-  },
-  {
-    id: 3,
-    name: '虎鲸 Orca',
-    colors: [
-      { name: '经典黑白', price: 35.00, image: orca },
-    ]
-  },
-  {
-    id: 4,
-    name: '锤头鲨 Hammerhead',
-    colors: [
-      { name: '浅灰色', price: 45.00, image: hammerLightGrey },
-      { name: '碳蓝色', price: 45.00, image: hammerBlue },
-    ]
-  },
-];
 
 const Souvenirs = () => {
+  const { t } = useTranslation();
+  const souvenirs = [
+    {
+      id: 1,
+      name: '蝠鲼 Manta',
+      colors: [
+        { name: t('souvenirs.colors.classicLightGrey'), price: 38.00, image: mantaLightGrey },
+        { name: t('souvenirs.colors.classicDarkGrey'), price: 38.00, image: mantaDarkGrey },
+        { name: t('souvenirs.colors.starryBlue'), price: 45.00, image: mantaStaryBlue },
+        { name: t('souvenirs.colors.starryGreen'), price: 45.00, image: mantaStaryGreen },
+      ]
+    },
+    {
+      id: 2,
+      name: '鲸鲨 Whale Shark',
+      colors: [
+        { name: t('souvenirs.colors.lightGrey'), price: 35.00, image: whaleSharkDarkGrey },
+        { name: t('souvenirs.colors.lightBlue'), price: 35.00, image: whaleSharkLightBlue },
+        { name: t('souvenirs.colors.darkBlue'), price: 35.00, image: whaleSharkDarkBlue },
+      ]
+    },
+    {
+      id: 3,
+      name: '虎鲸 Orca',
+      colors: [
+        { name: t('souvenirs.colors.classicBlackWhite'), price: 35.00, image: orca },
+      ]
+    },
+    {
+      id: 4,
+      name: '锤头鲨 Hammerhead',
+      colors: [
+        { name: t('souvenirs.colors.lightGrey'), price: 45.00, image: hammerLightGrey },
+        { name: t('souvenirs.colors.carbonBlue'), price: 45.00, image: hammerBlue },
+      ]
+    }
+  ];
   const [selectedColors, setSelectedColors] = useState({});
   const [quantities, setQuantities] = useState({});
   const [stock, setStock] = useState({});
@@ -142,7 +145,7 @@ const Souvenirs = () => {
         const variantIndex = selectedColors[itemId] || 0;
         const maxAvailable = itemStock.variants[variantIndex];
         if (newQuantity > maxAvailable) {
-          alert(`库存不足，当前最多可购买 ${maxAvailable} 件`);
+          alert(`${t('alerts.insufficientStock')} ${maxAvailable} ${t('alerts.unit')}`);
           return prev;
         }
       }
@@ -165,7 +168,7 @@ const Souvenirs = () => {
   const handleQuantityInputSubmit = (itemId) => {
     const value = parseInt(quantityInput[itemId], 10);
     if (isNaN(value) || value < 1) {
-      alert('请输入有效的数量');
+      alert(t('alerts.invalidQuantity'));
       return;
     }
     
@@ -175,7 +178,7 @@ const Souvenirs = () => {
       const variantIndex = selectedColors[itemId] || 0;
       const maxAvailable = itemStock.variants[variantIndex];
       if (value > maxAvailable) {
-        alert(`库存不足，当前最多可购买 ${maxAvailable} 件`);
+        alert(`${t('alerts.insufficientStock')} ${maxAvailable} ${t('alerts.unit')}`);
         return;
       }
     }
@@ -203,7 +206,7 @@ const Souvenirs = () => {
     if (itemStock) {
       const variantStock = itemStock.variants[colorIndex];
       if (quantity > variantStock) {
-        alert(`库存不足，当前最多可购买 ${variantStock} 件`);
+        alert(`${t('alerts.insufficientStock')} ${variantStock} ${t('alerts.unit')}`);
         return;
       }
     }
@@ -247,7 +250,7 @@ const Souvenirs = () => {
     if (itemStock) {
       const variantStock = itemStock.variants[colorIndex];
       if (newQuantity > variantStock) {
-        alert(`库存不足，当前最多可购买 ${variantStock} 件`);
+        alert(`${t('alerts.insufficientStock')} ${variantStock} ${t('alerts.unit')}`);
         return;
       }
     }
@@ -274,7 +277,7 @@ const Souvenirs = () => {
   const handleCheckout = async () => {
     // 验证客户信息
     if (!customerInfo.name || !customerInfo.email || !customerInfo.phone || !customerInfo.address) {
-      alert('请填写完整的客户信息');
+      alert(t('alerts.completeInfo'));
       return;
     }
     
@@ -327,9 +330,9 @@ const Souvenirs = () => {
       <Header />
       <main className="pt-16 pb-12">
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-center my-6">Wavecation纪念品</h1>
-          <h2 className="text-2xl font-semibold text-center mb-6">海洋生物钥匙圈</h2>
-          <p className="text-lg text-center mb-12">全关节可动，怎么扭都可以，解压效果拉满！</p>
+          <h1 className="text-4xl font-bold text-center my-6">{t('souvenirs.title')}</h1>
+          <h2 className="text-2xl font-semibold text-center mb-6">{t('souvenirs.subtitle')}</h2>
+          <p className="text-lg text-center mb-12">{t('souvenirs.desc')}</p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {souvenirs.map(item => {
@@ -357,7 +360,7 @@ const Souvenirs = () => {
                     
                     {item.colors && (
                       <div className="my-2">
-                        <p className="text-sm font-medium text-gray-700">选择颜色：</p>
+                        <p className="text-sm font-medium text-gray-700">{t('souvenirs.color')}：</p>
                         <div className="flex flex-wrap gap-2 mt-1">
                           {item.colors.map((color, index) => (
                             <button
@@ -370,7 +373,7 @@ const Souvenirs = () => {
                               } ${itemStock?.variants?.[index] === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
                               disabled={itemStock?.variants?.[index] === 0}
                             >
-                              {color.name} {itemStock?.variants?.[index] === 0 ? '(售罄)' : ''}
+                              {color.name} {itemStock?.variants?.[index] === 0 ? `(${t('souvenirs.soldOut')})` : ''}
                             </button>
                           ))}
                         </div>
@@ -378,7 +381,7 @@ const Souvenirs = () => {
                     )}
                     
                     <div className="mt-2">
-                      <p className="text-sm font-medium text-gray-700">数量：</p>
+                      <p className="text-sm font-medium text-gray-700">{t('souvenirs.quantity')}：</p>
                       {showQuantityInput[item.id] ? (
                         <div className="flex items-center mt-1">
                           <input
@@ -393,13 +396,13 @@ const Souvenirs = () => {
                             onClick={() => handleQuantityInputSubmit(item.id)}
                             className="ml-2 px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
                           >
-                            确定
+                            {t('souvenirs.confirm')}
                           </button>
                           <button 
                             onClick={() => setShowQuantityInput(prev => ({...prev, [item.id]: false}))}
                             className="ml-1 px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
                           >
-                            取消
+                            {t('souvenirs.cancel')}
                           </button>
                         </div>
                       ) : (
@@ -428,7 +431,7 @@ const Souvenirs = () => {
                             +
                           </button>
                           <span className="ml-2 text-sm text-gray-500">
-                            {variantStock > 0 ? `库存: ${variantStock}` : '已售罄'}
+                            {variantStock > 0 ? `${t('souvenirs.stock')} : ${variantStock}` : t('souvenirs.soldOut')}
                           </span>
                         </div>
                       )}
@@ -447,7 +450,7 @@ const Souvenirs = () => {
                         }`}
                         disabled={variantStock === 0}
                       >
-                        {variantStock > 0 ? '加入购物车' : '已售罄'}
+                        {variantStock > 0 ? t('souvenirs.button') : t('souvenirs.soldOut')}
                       </button>
                     </div>
                   </div>
@@ -456,7 +459,7 @@ const Souvenirs = () => {
               );
             })}
             <p className="text-xs text-gray-500 mt-2 text-center flex mt-0">
-            * 满RM200可享免邮优惠
+            {t('souvenirs.freeShipping')}
             </p>
           </div>
         </section>

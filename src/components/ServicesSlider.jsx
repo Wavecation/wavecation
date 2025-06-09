@@ -1,34 +1,46 @@
 import React, { useState, useRef } from 'react';
 import ServiceCard from './ServiceCard';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const ServicesSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation(); 
+  
+    // 定义 changeLanguage 函数
+  const changeLanguage = async (lng) => {
+    try {
+      await i18n.changeLanguage(lng);
+      console.log('Language changed to:', lng);
+    } catch (err) {
+      console.error('Failed to change language:', err);
+    }
+  };  
 
   const services = [
     {
-      title: "个性化旅游安排",
-      description: "我们为每位客户提供量身定制的旅游方案，以满足您的特定需求和喜好。无论是潜水还是浮潜，我们都会为您安排最佳体验。",
+      title: t('services.title1'),
+      description: t('services.desc1'),
       image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      buttonText: "立即咨询",
+      buttonText: t('services.button1'),
       bgColor: "bg-white",
       onClick: () => window.location.href = '/trips'
     },
     {
-      title: "丰富的纪念品",
-      description: "在Wavecation，我们提供各种精美的纪念品，如钥匙圈、手链、吊绳等，帮助您留住旅行的美好回忆。",
+      title: t('services.title2'),
+      description: t('services.desc2'),
       image: "https://images.unsplash.com/photo-1698423955414-fee71b18e0b6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      buttonText: "浏览商品",
+      buttonText: t('services.button2'),
       bgColor: "bg-white",
       onClick: () => window.location.href = '/souvenirs'
     },
     {
-      title: "潜水旅游团",
-      description: "参加我们的潜水旅游团，探索世界各地的迷人景点，享受安全、便捷的旅行体验。",
+      title: t('services.title3'),
+      description: t('services.desc3'),
       image: "https://images.unsplash.com/photo-1625542405819-b811c3416b5e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Ds",
-      buttonText: "查看行程",
+      buttonText: t('services.button3'),
       bgColor: "bg-white",
       onClick: () => {
         // 强制刷新并跳转到 diving-tours 区块
@@ -43,10 +55,10 @@ const ServicesSlider = () => {
       }
     },
     {
-      title: "海边/水下写真拍摄",
-      description: "由认证潜水摄影师为您捕捉海底精彩瞬间，提供高清水下写真及视频拍摄，记录您的海洋探索之旅。",
+      title: t('services.title4'),
+      description: t('services.desc4'),
       image: "/images/underwater_photograph.jpg",
-      buttonText: "预约拍摄",
+      buttonText: t('services.button4'),
       bgColor: "bg-white",
       onClick: () => window.location.href = '/trips'
     }
