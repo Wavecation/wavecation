@@ -1,5 +1,6 @@
     import i18n from 'i18next';
     import { initReactI18next } from 'react-i18next';
+    import LanguageDetector from 'i18next-browser-languagedetector';
 
 
     // 正确的对象语法，使用冒号而不是等号
@@ -359,15 +360,20 @@
     };
 
         
-    i18n
-    .use(initReactI18next)
-    .init({
-        resources,
-        lng: "en", // 手动设置默认语言
-        fallbackLng: "en",
-        interpolation: {
-        escapeValue: false,
-        }
-    });
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources, // 确保包含resources
+    fallbackLng: 'en',
+    detection: {
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage'],
+      lookupLocalStorage: 'i18nextLng' // 明确指定localStorage key
+    },
+    interpolation: {
+      escapeValue: false // React已经防止XSS
+    }
+  });
 
-    export default i18n;
+export default i18n;
