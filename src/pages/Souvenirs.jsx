@@ -458,7 +458,7 @@ const Souvenirs = () => {
                 
               );
             })}
-            <p className="text-xs text-gray-500 mt-2 text-center flex mt-0">
+            <p className="text-xs text-gray-500 text-center flex mt-0">
             {t('souvenirs.freeShipping')}
             </p>
           </div>

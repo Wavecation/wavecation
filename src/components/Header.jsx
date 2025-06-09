@@ -19,16 +19,14 @@ const Header = () => {
 
   // 处理普通导航（强制刷新）
   const handleNavigation = (path) => {
-    window.location.href = path; // 使用window.location.href强制刷新
+    window.location.href = path;
   };
 
   // 特殊处理"联系我们"按钮
   const handleContactClick = () => {
     if (window.location.pathname !== '/') {
-      // 如果不在首页，导航到首页并添加hash
       window.location.href = '/#contact';
     } else {
-      // 如果在首页，滚动到联系部分
       const contactSection = document.getElementById('contact');
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: 'smooth' });
@@ -63,7 +61,7 @@ const Header = () => {
               <li key={item.path || item.key}>
                 <button
                   onClick={item.onClick}
-                  className="header-link cursor-pointer"
+                  className="header-link cursor-pointer transition-colors duration-200"
                 >
                   {t(item.key)}
                 </button>
@@ -76,7 +74,7 @@ const Header = () => {
         <div className="relative hidden md:block">
           <button 
             onClick={toggleLanguage}
-            className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors"
+            className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors duration-200"
             aria-label="Change language"
           >
             <FaGlobe className="text-lg" />
@@ -102,17 +100,23 @@ const Header = () => {
         </div>
       </div>
 
-      {/* 移动端菜单按钮和语言切换器 */}
-      <div className="flex items-center md:hidden space-x-3 ">
+      {/* 移动端菜单按钮和语言切换器 - 保持水平对齐 */}
+      <div className="flex items-center md:hidden space-x-4"> {/* 增加space-x到4 */}
+        {/* 语言切换按钮 - 添加hover效果 */}
         <button 
           onClick={() => changeLanguage(i18n.language === 'en' ? 'zh' : 'en')}
-          className="text-gray-700 px-2 py-1 rounded-md border border-gray-300 text-sm"
+          className="text-gray-700 px-2 py-1 rounded-md border border-gray-300 text-sm hover:bg-gray-100 transition-colors duration-200"
         >
           {i18n.language === 'en' ? '中文' : 'EN'}
         </button>
 
+        {/* 汉堡菜单按钮 - 添加不同状态的hover效果 */}
         <button 
-          className="text-gray-700 focus:outline-none p-2 rounded-full hover:bg-gray-100"
+          className={`text-gray-700 focus:outline-none p-2 rounded-full transition-colors duration-200 ${
+            isMenuOpen 
+              ? 'hover:bg-gray-100 hover:text-red-600' // 打开状态hover效果
+              : 'hover:bg-gray-100 hover:text-blue-600' // 关闭状态hover效果
+          }`}
           onClick={toggleMenu}
         >
           {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -127,7 +131,7 @@ const Header = () => {
               <li key={item.path || item.key}>
                 <button
                   onClick={item.onClick}
-                  className="block py-2 w-full text-left"
+                  className="block py-2 w-full text-left hover:text-blue-600 transition-colors duration-200"
                 >
                   {t(item.key)}
                 </button>
