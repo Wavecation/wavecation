@@ -103,7 +103,7 @@ const Header = () => {
       </div>
 
       {/* 移动端菜单按钮和语言切换器 */}
-      <div className="flex items-center md:hidden space-x-3">
+      <div className="flex items-center md:hidden space-x-3 ">
         <button 
           onClick={() => changeLanguage(i18n.language === 'en' ? 'zh' : 'en')}
           className="text-gray-700 px-2 py-1 rounded-md border border-gray-300 text-sm"
