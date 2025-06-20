@@ -94,7 +94,7 @@ const DivingTours = () => {
         <section 
           className="h-[100vh] bg-cover bg-center bg-fixed flex flex-col items-center justify-center text-white relative"
           style={{ 
-            backgroundImage: "url('https://media.istockphoto.com/id/2163600378/photo/stingray-swimming-in-sea.webp?a=1&b=1&s=612x612&w=0&k=20&c=7nzfvCQxy35qLIgONn2pr3GqBVp6DBjRIDSqFVPgEMY=')",
+            backgroundImage: "url('https://media.istockphoto.com/id/179680401/photo/underwater-photograph-of-a-manta-ray-and-shoal-of-fish.webp?a=1&b=1&s=612x612&w=0&k=20&c=W3x1EBO7QVm9VKWhu5sQ0vE1xE3zEQg8sB-qzwU--MU=')",
             backgroundColor: '#0a1a2f' // fallback dark blue
           }}
         >
