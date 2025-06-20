@@ -222,8 +222,7 @@ const DivingTours = () => {
             </div>
 
             <div className="relative flex flex-col md:flex-row gap-8">
-              {/* 背景装饰 - 左侧 */}
-              <div className="hidden md:block absolute top-0 left-0 w-1/2 h-full bg-gradient-to-br from-green-50 to-blue-50 rounded-tr-[4rem] rounded-br-[6rem] z-0"></div>
+              
 
               {/* 费用包含 */}
               <div className="md:w-1/2 relative z-10 bg-white rounded-2xl shadow-lg p-8 border-t-4 border-green-500 hover:shadow-xl transition-shadow duration-300">
