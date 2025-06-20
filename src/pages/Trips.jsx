@@ -60,7 +60,10 @@ const Trips = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    alert(t('trips.booking_disabled_message'));
     
+    /*
     // 创建订单对象
     const newOrder = {
       id: Date.now(),
@@ -103,6 +106,7 @@ const Trips = () => {
         accommodation: formData.accommodation
       } 
     });
+    */
   };
 
 
@@ -416,7 +420,7 @@ const Trips = () => {
                         type="submit"
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
                         >
-                        {t('trips.button')}
+                        {t('trips.contact_us_button')}
                         </button>
                     </div>
                     </form>

@@ -46,7 +46,7 @@ const Souvenirs = () => {
           color_name_zh: "浅灰色",
           price: 35.00,
           image_path: mantaLightGrey,
-          quantity: 10
+          quantity: 0
         },
         {
           id: 102,
@@ -54,7 +54,7 @@ const Souvenirs = () => {
           color_name_zh: "深灰色",
           price: 35.00,
           image_path: mantaDarkGrey,
-          quantity: 8
+          quantity: 0
         },
         {
           id: 103,
@@ -62,7 +62,7 @@ const Souvenirs = () => {
           color_name_zh: "星空蓝",
           price: 45.00,
           image_path: mantaStaryBlue,
-          quantity: 5
+          quantity: 0
         },
         {
           id: 104,
@@ -70,7 +70,7 @@ const Souvenirs = () => {
           color_name_zh: "星空绿",
           price: 45.00,
           image_path: mantaStaryGreen,
-          quantity: 3
+          quantity: 0
         }
       ]
     },
@@ -85,7 +85,7 @@ const Souvenirs = () => {
           color_name_zh: "深灰色",
           price: 35.00,
           image_path: whaleSharkDarkGrey,
-          quantity: 7
+          quantity: 0
         },
         {
           id: 202,
@@ -93,7 +93,7 @@ const Souvenirs = () => {
           color_name_zh: "浅蓝色",
           price: 35.00,
           image_path: whaleSharkLightBlue,
-          quantity: 6
+          quantity: 0
         },
         {
           id: 203,
@@ -101,7 +101,7 @@ const Souvenirs = () => {
           color_name_zh: "深蓝色",
           price: 35.00,
           image_path: whaleSharkDarkBlue,
-          quantity: 4
+          quantity: 0
         }
       ]
     },
@@ -116,7 +116,7 @@ const Souvenirs = () => {
           color_name_zh: "经典款",
           price: 35.00,
           image_path: orca,
-          quantity: 9
+          quantity: 0
         }
       ]
     },
@@ -131,7 +131,7 @@ const Souvenirs = () => {
           color_name_zh: "浅灰色",
           price: 45.00,
           image_path: hammerLightGrey,
-          quantity: 6
+          quantity: 0
         },
         {
           id: 402,
@@ -139,7 +139,7 @@ const Souvenirs = () => {
           color_name_zh: "蓝色",
           price: 45.00,
           image_path: hammerBlue,
-          quantity: 5
+          quantity: 0
         }
       ]
     }

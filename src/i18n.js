@@ -90,6 +90,8 @@ const resources = {
             yes: "Yes",
             no: "No",
             button: "Submit Booking Request",
+            contact_us_button: "Submit Booking Request",
+            booking_disabled_message: "Due to system upgrades, online bookings are temporarily unavailable. Please contact us via our social media or WhatsApp to make your reservation. We apologize for any inconvenience.",
             tourstitle: "Upcoming Diving Tours",
             toursdesc1: "We're planning more exciting dive trips to world-class sites like Komodo and Mabul Island.",
             toursdesc2: "Coming Soon"
@@ -315,6 +317,8 @@ const resources = {
             yes: "是",
             no: "否",
             button: "提交预订请求",
+            contact_us_button: "提交预订请求",
+            booking_disabled_message: "由于系统升级，目前暂不接受在线预订。请通过我们的社交媒体或WhatsApp联系我们进行预订，给您带来不便敬请谅解。",
             tourstitle: "潜水旅游团即将开放",
             toursdesc1: "我们正在筹备更多精彩的潜水旅游团，包括科莫多、马布岛等世界级潜点",
             toursdesc2: "即将推出"
