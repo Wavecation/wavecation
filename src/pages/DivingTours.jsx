@@ -324,12 +324,12 @@ const DivingTours = () => {
                   'birdPlay1',
                   'birdRestaurant1',
                   'birdPlay2',
-                  'birdRestaurant2'
+                  'birdGear'
                 ].map((imgName, index) => (
                   <div key={index} className="overflow-hidden shadow-md relative group">
                     <img
                       src={`/images/${imgName}.jpg`}
-                      alt={`Resort ${['娱乐区', '餐厅', '娱乐区', '餐厅'][index]}`}
+                      alt={`Resort ${['娱乐区', '餐厅', '娱乐区', '潜水装备'][index]}`}
                       className="w-full h-full object-cover transition-transform duration-300"
                       loading="lazy"
                       onError={(e) => {
