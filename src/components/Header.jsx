@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import logo from '../images/logo_trans.png';
 import { FaBars, FaTimes, FaGlobe } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,10 +11,19 @@ const Header = () => {
   const [isTripsHovered, setIsTripsHovered] = useState(false);
   const dropdownRef = useRef(null);
   const hoverTimerRef = useRef(null);
+  const navigate = useNavigate();
+  const [isMobileTripsOpen, setIsMobileTripsOpen] = useState(false); // 仅用于移动端
+  const [isDesktopTripsHovered, setIsDesktopTripsHovered] = useState(false); // 仅用于桌面端
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setIsLanguageOpen(false);
+  };
+
+  const handleNavClick = (path) => {
+    navigate(path); // 使用 react-router 的导航
+    setIsMenuOpen(false); // 关闭菜单
+    setIsMobileTripsOpen(false); // 关闭下拉
   };
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -214,34 +223,40 @@ const Header = () => {
                 {item.isDropdown ? (
                   <div className="relative">
                     <button
-                      onClick={() => setIsTripsHovered(!isTripsHovered)}
-                      className="block py-2 w-full text-left hover:text-blue-600 transition-colors duration-200"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsMobileTripsOpen(!isMobileTripsOpen);
+                      }}
+                      className="flex justify-between items-center py-2 w-full text-left"
                     >
                       {t(item.key)}
+                      
                     </button>
-                    
-                    {isTripsHovered && (
+
+                    {isMobileTripsOpen && (
                       <div className="pl-4 mt-1">
                         {item.dropdownItems.map((dropdownItem) => (
-                          <Link
+                          <button
                             key={dropdownItem.path}
-                            to={dropdownItem.path}
-                            className="block py-2 text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm"
-                            onClick={() => {
-                              setIsMenuOpen(false);
-                              setIsTripsHovered(false);
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleNavClick(dropdownItem.path); // 使用统一跳转方法
                             }}
+                            className="block py-2 text-gray-700 hover:text-blue-600 text-sm w-full text-left"
                           >
                             {t(dropdownItem.key)}
-                          </Link>
+                          </button>
                         ))}
                       </div>
                     )}
                   </div>
                 ) : (
                   <button
-                    onClick={item.onClick}
-                    className="block py-2 w-full text-left hover:text-blue-600 transition-colors duration-200"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNavClick(item.path);
+                    }}
+                    className="block py-2 w-full text-left hover:text-blue-600"
                   >
                     {t(item.key)}
                   </button>
