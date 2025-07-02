@@ -220,7 +220,7 @@ const resources = {
             amedP1:"Located on the northeast coast of Bali, Amed Bay is known for its calm black-sand beaches and vibrant marine biodiversity. The clear and gentle waters make it an ideal spot for shore dives and buoyancy practice—perfect for divers who love to slow down and explore the little things.",
             amedP2:"Amed's dive sites offer a mix of coral slopes, wrecks, and macro havens. From pygmy seahorses to colorful nudibranchs and rare critters hiding among soft corals, every dive here reveals a new underwater wonder.",
             tulamben:"Tulamben",
-            tulambenP1:"Tulamben is one of Bali’s most iconic dive destinations, best known for the WWII wreck site — the USS Liberty. Resting just off the shore, this accessible wreck is perfect for all diver levels and a dream location for wreck photography and exploration.",
+            tulambenP1:"Tulamben is one of Bali's most iconic dive destinations, best known for the WWII wreck site — the USS Liberty. Resting just off the shore, this accessible wreck is perfect for all diver levels and a dream location for wreck photography and exploration.",
             tulambenP2:"Beyond the wreck, Tulamben is home to vibrant marine life including massive schools of fish, giant octopuses, lionfish, and nudibranchs. The diverse underwater landscape makes every dive an exciting and discovery-filled experience.",
             contactTitle: "Contact Us to Register or Ask",
             requirementLabel: "Minimum Requirement:",
