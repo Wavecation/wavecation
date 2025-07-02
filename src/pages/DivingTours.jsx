@@ -415,8 +415,8 @@ const DivingTours = () => {
             </h2>
 
             <p className="text-lg mb-6">
-              📌 {t('tours.requirementLabel')} 
-              <span className="font-semibold text-cyan-300">{t('tours.requirements.aow', 'AOW 潜水证照')}</span>
+              📌 {t('tours.requirementLabel')}  
+               <span className="font-semibold text-cyan-300">{t('tours.requirementsAOW')}</span>
             </p>
 
             <p className="text-lg mb-10">
