@@ -7,6 +7,7 @@ import About from './pages/About';
 import Trips from './pages/Trips';
 import Confirmation from './pages/Confirmation';
 import AdminPanel from './pages/AdminPanel';
+import AdminPage from './pages/AdminPage';
 import './styles/globals.css';
 import DivingTours from './pages/DivingTours';
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/diving-tours" element={<DivingTours />} />
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/adminpage" element={<AdminPage />} />
       </Routes>
     </Router>
   );

@@ -189,7 +189,7 @@ const resources = {
                 title: "BALI 6D5N Dive Trip",
                 posterAlt: "Bali Dive Trip Poster"
             },
-            locations: "Amed | Nusa Penida | Nusa Lembongan",
+            locations: "Amed | Tulamben | Nusa Penida ",
             divePackage:"12 Dives with Big Marine Life Encounters",
             button:"Explore Now",
             earlyBird: "Early Bird Deal",

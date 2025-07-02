@@ -323,7 +323,7 @@ const DivingTours = () => {
                 {[
                   'birdPlay1',
                   'birdRestaurant1',
-                  'birdPlay2',
+                  'birdPlay2',  
                   'birdGear'
                 ].map((imgName, index) => (
                   <div key={index} className="overflow-hidden shadow-md relative group">
